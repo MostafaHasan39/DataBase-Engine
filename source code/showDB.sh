@@ -1,0 +1,24 @@
+#!/bin/bash
+
+while true
+do
+    clear
+    echo "***************************************************"
+    echo "*                 List DataBases                  *"
+    echo "***************************************************"
+    echo
+	echo Available DataBases Are:
+	ls ../DBs
+    echo
+	echo Please Enter Database Name To Use:
+	read dbname
+
+    # Check if this database is already exist
+    if [ -e ../DBs/$dbname ]
+		then
+		. tableMenu.sh $dbname 
+		else
+        echo This DataBase does not exist in this list
+        sleep 2 
+    fi		
+done
