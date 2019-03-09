@@ -17,13 +17,13 @@ do
     if [ $dbname = 1 ]
         then
         . dbMenu.sh
-        sleep 2
         else 
         # Check if this database is already exist
         if [ -e ../DBs/$dbname ]
 		    then
-		    rmdir ../DBs/$dbname
-            . deleteDB.sh 
+            # hint: don't use rmdir to remove the directory because if it has data it won't be deleted
+		    rm -rf ../DBs/$dbname
+            . deleteDB.sh
 		    else
             echo This DataBase does not exist in this list
             sleep 2 
