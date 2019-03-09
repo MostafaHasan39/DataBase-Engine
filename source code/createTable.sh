@@ -35,7 +35,7 @@ do
           touch ../DBs/$dbname/$tableName
           echo "Table Created Successfully"
           sleep 2
-          . showTable.sh
+          . tableStructure.sh
         fi 
         else
         # Name isn't Valid 
