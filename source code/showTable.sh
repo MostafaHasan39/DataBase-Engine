@@ -23,7 +23,7 @@ do
         # Check if this table is already exist
         if [ -e ../DBs/$dbname/$tableName ]
 		    then
-		    . tableActionMenu.sh $tableName 
+		    . tableActionMenu.sh $dbname $tableName 
 		    else
             echo This Table does not exist in this list
             sleep 2 
