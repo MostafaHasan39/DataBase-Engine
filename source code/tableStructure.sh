@@ -18,37 +18,37 @@ echo -e "please enter the number of columns in this table or (b) to back to tabl
 read noColumns
 
 if [[ "$noColumns" = b ]]
-then
-    . tableMenu.sh
+    then
+        . tableMenu.sh
 fi
 
 if [[ "$noColumns" =~ ^[1-9]+$ ]]
-then 
-# Getting and validating number of columns 
-  echo "Number of columns = $noColumns"
-else 
-   echo Please insert non zero Number
-      sleep 2
-      continue 
- fi 
+    then 
+        # Getting and validating number of columns 
+        echo "Number of columns = $noColumns"
+    else 
+        echo Please insert non zero Number
+        sleep 2
+        continue 
+fi 
 
- for ((i=1;i<=$noColumns;i++))
-   do 
-        echo
-        echo -e "Please select column $i name :"
-         read columnName
-        #Validating column name
-        if ! [[ "$columnName" =~ ^[a-zA-Z][0-9|a-z|A-Z|_|\d]*$ ]]
-           then 
-                i=$i-1
-                echo "Please Insert valid Name starting with letters only" 
-                sleep 2
-                continue
-        fi
+for ((i=1;i<=$noColumns;i++))
+do 
+    echo
+    echo -e "Please select column $i name :"
+    read columnName
+    #Validating column name
+    if ! [[ "$columnName" =~ ^[a-zA-Z][0-9|a-z|A-Z|_|\d]*$ ]]
+        then 
+            i=$i-1
+            echo "Please Insert valid Name starting with letters only" 
+            sleep 2
+            continue
+    fi
 
-        # Getting index of the primary key 
-        if  [[ $isPrimaryKeySet -eq 0 ]]
-           then
+    # Getting index of the primary key 
+    if  [[ $isPrimaryKeySet -eq 0 ]]
+        then
            echo "Note: in case you don't choose any field to be Primary key, the default is first field."
            echo "Is this field primary Key?[y for yes | any key to cancel]"
            read primaryKeyConfirm
@@ -57,23 +57,22 @@ else
               primaryKeyIndex=$i
               isPrimaryKeySet=1
             fi
-        fi
+    fi
                
-        echo
-        echo "Please select column $i data type :"
-        select choice in "Number" "String"
-        do
-            case $REPLY in
-                1) printf "$columnName Number:" >> ../DBs/$dbname/$tableName
-                break
-                ;;
-                2) printf "$columnName String:" >> ../DBs/$dbname/$tableName
+    echo
+    echo "Please select column $i data type :"
+    select choice in "Number" "String"
+    do
+        case $REPLY in
+            1) printf "$columnName Number:" >> ../DBs/$dbname/$tableName
                 break;;
-                *) echo "Please Insert bumber between 1 and 3";;
-            esac
-        done
-
+            2) printf "$columnName String:" >> ../DBs/$dbname/$tableName
+                break;;
+            *) echo "Please Insert bumber between 1 and 3";;
+        esac
     done
+
+done
 
  
 echo "All columns created successfully"

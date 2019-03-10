@@ -3,8 +3,9 @@
 clear     # clear the screen
 
 echo "***************************************************"
-echo "*              Welcome To DataBase Engine         *"
+echo "*            Welcome To Our DataBase Engine       *"
 echo "*                 Bash Shell  script              *"
+echo "              Mostafa Hassan and Mohamed Helmy     "
 echo "***************************************************"
 echo
 echo "Please Enter Your Selection:"

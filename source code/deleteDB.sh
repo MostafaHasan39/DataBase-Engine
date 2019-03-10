@@ -4,10 +4,10 @@ while true
 do
     clear
     echo "***************************************************"
-    echo "*                Delete DataBase                  *"
+    echo "*              Delete Existed DataBase            *"
     echo "***************************************************"
     echo
-	echo Available DataBases Are:
+	echo "Available DataBases Are:"
 	ls ../DBs
     echo
 	echo "Please Enter Database Name To delete or (1) to Back":
@@ -25,7 +25,7 @@ do
 		    rm -rf ../DBs/$dbname
             . deleteDB.sh
 		    else
-            echo This DataBase does not exist in this list
+            echo "This DataBase does not exist in this list"
             sleep 2 
         fi
     fi        		

@@ -6,7 +6,7 @@ do
     clear
     echo "***************************************************"
     echo "                 DataBase Name: $1                 "
-    echo "*                    List Tables                  *"
+    echo "*                 List All Tables                 *"
     echo "***************************************************"
     echo
 	echo Available Tables Are:
@@ -18,15 +18,15 @@ do
     # Check if the user wants to back
   	if [ $tableName = 1 ]
       then
-      . tableMenu.sh
+        . tableMenu.sh
       else
         # Check if this table is already exist
         if [ -e ../DBs/$dbname/$tableName ]
 		    then
-		    . tableActionMenu.sh $dbname $tableName 
+		        . tableActionMenu.sh $dbname $tableName 
 		    else
-            echo This Table does not exist in this list
-            sleep 2 
+                echo This Table does not exist in this list
+                sleep 2 
         fi
     fi    		
 done

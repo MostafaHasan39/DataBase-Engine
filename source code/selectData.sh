@@ -27,9 +27,12 @@ echo "${columnsTypes[@]}"
 echo 
 echo "Table Data:"
 
-
-#awk -F: '{NR>=4 {print $0}}' ../DBs/$dbname/$tableName
 awk -F: 'NR>3' ../DBs/$dbname/$tableName
+
+echo 
+echo "Press any key to return to table action menu"
+read userinput
+. tableActionMenu.sh $dbname $tableName
 
 
 

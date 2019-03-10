@@ -1,38 +1,48 @@
 
-#!/bin/bash
-let primfield=0
-dbname = $1
-tbname = $2
+# #!/bin/bash
+dbname=$1
+tableName=$2
+clear     # clear the screen
+echo "***************************************************"
+echo "                 DataBase Name: $dbname            "
+echo "                  Table Name: $tableName           "
+echo "                 Deleting Specific Row Data      "
+echo "***************************************************"
+echo
 
-while true
-do        
-    clear
-    echo "***************************************************"
-    echo "                 DataBase Name: $dbname            "
-    echo "*                  Table Name: $tablename         *"
-    echo "*                    Delete Row                   *"
-    echo "***************************************************"
-    echo
+primaryKeyIndex=`head -2 ../DBs/$dbname/$tableName | tail -1 | cut -d ":" -f2`
 
-    sed -n '2p' ../DBs/$dbname/.$tbname.meta 
-    sed -n 'p' ../DBs/$dbname/$tbname | sort -t: -k"$[ $(sed -n '1p' ../DBs/$dbname/.$tbname.meta) + 1 ]" 
+echo "Do you have The primary key value of the row you need to delete?[y|n]"
+read userInput 
 
-    echo  Enter Value of Primary Key to Delete
-    read primaryKey
-    primfield="$(sed -n "1p" ../DBs/$dbname/.$tbname.meta)"
-    primfield=$(( $primfield+1 ))
-    myx="$(sed -n "/.*:$primaryKey$/p" ../DBs/$dbname/$tbname | cut -d: -f$primfield )" 
+if [[ "$userInput" =~ ^[y|Y] ]]
+    then
+        echo "Please enter this primary key:"
+        read pk
+        #Add deleting section
+        Row_delete=$(awk -F: -v pk_index=$primaryKeyIndex -v u_input=$pk 'NR>3 && $pk_index==u_input {print $0}' ../DBs/$dbname/$tableName)
+        if [ -z $Row_delete ] #Nothing to delete
+            then 
+                echo "This primary key is not existed!!."
+                sleep 2
+                . tableActionMenu.sh $dbname $tableName
+            else #This PK is existed
+                sed -i "/^$Row_delete$/d" ../DBs/$dbname/$tableName
+                echo "Row deleted successfully. Press any key to Back to table action menu"
+                read userInput2
+                . tableActionMenu.sh $dbname $tableName
+        fi
+    else 
+        . tableActionMenu.sh $dbname $tableName
+fi
 
-    if [ "$primaryKey" != "$myx" ] 
-        then
-        echo Primary Key $primaryKey Does not Exist
-        read a
-        exit
-        else
-        sed -i "/.*:$primaryKey$/d" ../DBs/$dbname/$tbname 2>/dev/null
-        sed -i "/$primaryKey$/d" ../DBs/$dbname/$tbname 2>/dev/null
-    fi
 
-    echo "Successfully deleted row identified by $primaryKey ,table name: $tbname in $dbname database"
-    read a
-done
+
+
+
+
+
+
+
+
+
