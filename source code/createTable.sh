@@ -19,7 +19,7 @@ do
     # Check if the user wants to back
   	if [ $tableName = 1 ]
       then
-      . tableMenu.sh
+      . tableMenu.sh $dbname
       else
       # Check if the tableName is valid
       if [[ "$tableName" =~ ^[a-zA-Z][0-9|a-z|A-Z|_|\d]*$ ]]
@@ -35,7 +35,7 @@ do
           touch ../DBs/$dbname/$tableName
           echo "Table Created Successfully"
           sleep 2
-          . tableStructure.sh
+          . tableStructure.sh $dbname $tableName
         fi 
         else
         # Name isn't Valid 
