@@ -22,7 +22,7 @@ if [[ "$noColumns" = b ]]
         . tableMenu.sh
 fi
 
-if [[ "$noColumns" =~ ^[1-9]+$ ]]
+if [[ "$noColumns" =~ ^[1-9][0-9]+$ ]]
     then 
         # Getting and validating number of columns 
         echo "Number of columns = $noColumns"
